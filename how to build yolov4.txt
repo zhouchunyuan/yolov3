@@ -1,0 +1,12 @@
+1) refer to <https://github.com/AlexeyAB/darknet#how-to-use-on-the-command-line>
+2) download from here: https://github.com/AlexeyAB/darknet/archive/master.zip
+3) un-zip "darknet-master.zip" to <C:\AI\yolov4\test\>
+4) according to <https://github.com/AlexeyAB/darknet#how-to-compile-on-windows-legacy-way>, open <C:\AI\yolov4\test\darknet-master\build\darknet\darknet.sln> by VS2019
+5) upon popup dialog of "检查解决方案操作", choose "Windows SDK版本：10.0（最新安装的版本）"，“平台工具集：升级到v1.42”
+6）click build, fails. If open directly darknet.vcxproj, we can see error message :"严重性	代码	说明	项目	文件	行	禁止显示状态
+错误	MSB4019	找不到导入的项目“C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations\CUDA 10.0.props”。请确认 Import 声明“C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\\BuildCustomizations\CUDA 10.0.props”中的表达式正确，且文件位于磁盘上。	darknet	C:\AI\yolov4\test\darknet-master\build\darknet\darknet.vcxproj	55	
+" Then open <C:\AI\yolov4\test\darknet-master\build\darknet\darknet.vcxproj> by text editor. change 2 places of "cuda 10.0" to "cuda 10.2"
+7)copy all files from <C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\extras\visual_studio_integration\MSBuildExtensions> into <C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\BuildCustomizations>
+8)copy "opencv_ffmpeg3410_64.dll" and "opencv_world3410.dll" into <C:\AI\yolov4\test\darknet-master\build\darknet\x64>
+9)copy yolov4.weights into <C:\AI\yolov4\test\darknet-master\build\darknet\x64>
+10) run "darknet.exe detector demo cfg/coco.data cfg/yolov4.cfg yolov4.weights -c 0" from cmd window to test webcam.
